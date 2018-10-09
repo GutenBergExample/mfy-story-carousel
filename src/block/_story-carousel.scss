@@ -1,0 +1,313 @@
+/*
+ * Z-Index Guide
+ * Story Overlay: 1
+ * Story Text: 2
+ * Story Edit Buttons: 3
+ * Story Nav Buttons: 4
+ */
+
+@import '../../node_modules/sass-bem/bem';
+// @import '../../node_modules/tiny-slider/dist/tiny-slider';
+
+@import 'colors';
+@import 'button';
+
+%edit-button {
+	all: unset;
+
+	background-color: grey;
+	box-shadow: 0 0.2rem 0.1rem #000a;
+	border-radius: 0.2rem;
+	cursor: pointer;
+	padding: 0.5rem;
+	position: absolute;
+	z-index: 3;
+
+	&:hover {
+		background-color: darken(grey, 20%);
+		box-shadow: 0 0.3rem 0.2rem #0008;
+	}
+}
+
+%edit-button-icon {
+	display: block;
+	height: auto;
+	width: 1.5rem;
+}
+
+%nav-button {
+	all: unset;
+
+	background-color: $color-wrong-orange;
+	cursor: pointer;
+	padding: 1rem;
+
+	&:hover {
+		background-color: $color-wrong-orange-t10;
+	}
+
+	svg {
+		fill: #fff;
+	}
+
+	&:hover svg {
+		fill: #000;
+	}
+}
+
+%nav-button-icon {
+	display: block;
+	height: auto;
+	width: 1rem;
+}
+
+@include b('story-carousel') {
+
+	display: flex;
+	flex-direction: row;
+	font-family: Gentona, sans-serif;
+
+	// Placeholder text
+	.editor-rich-text__tinymce + .editor-rich-text__tinymce {
+		color: #ccc;
+	}
+
+	@include e('info') {
+		flex-basis: 50%;
+		flex-grow: 0;
+		order: 1;
+	}
+
+	@include e('heading') {
+		color: $color-wrong-orange;
+
+		font-size: 3.375rem;
+    line-height: 3.5rem;
+	}
+
+	@include e('link') {
+		background-color: #ff0;
+		border: 1px solid #000;
+	}
+
+	//  ######  ########  #######  ########  #### ########  ######
+	// ##    ##    ##    ##     ## ##     ##  ##  ##       ##    ##
+	// ##          ##    ##     ## ##     ##  ##  ##       ##
+	//  ######     ##    ##     ## ########   ##  ######    ######
+	//       ##    ##    ##     ## ##   ##    ##  ##             ##
+	// ##    ##    ##    ##     ## ##    ##   ##  ##       ##    ##
+	//  ######     ##     #######  ##     ## #### ########  ######
+
+	@include e('stories-container') {
+		flex-basis: 50%;
+		flex-grow: 0;
+		order: 2;
+		padding-bottom: 0.5rem;
+		position: relative;
+	}
+
+	@include e('stories') {
+	}
+
+	@include e('story-container') {
+		// The background color shows before image loads
+		background-color: #000;
+		background-position: 50% 50%;
+		background-size: cover;
+		height: 0;
+		padding-bottom: 100%;
+		position: relative;
+		width: 100%;
+	}
+
+	@include e('story') {
+		height: 100%;
+		position: absolute;
+		width: 100%;
+	}
+
+	@include e('story-text') {
+		background-color: #000c;
+		bottom: 0;
+		color: #fff;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 800;
+		left: 0;
+    letter-spacing: 0.045em;
+    line-height: 1.875rem;
+		padding: 2rem;
+		position: absolute;
+    text-transform: uppercase;
+		width: 50%;
+		z-index: 2;
+	}
+
+	@include e('overlay') {
+		position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+		background-color: rgba(0,0,0,.6);
+		display: flex;
+    align-items: center;
+		justify-content: center;
+		z-index: 1;
+	}
+
+	@include e('overlay-text') {
+    color: #fff;
+		font-family: Gentona, sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0.045em;
+    line-height: 1.875rem;
+    position: relative;
+		text-transform: uppercase;
+
+		&::after {
+			position: absolute;
+			top: 50%;
+			left: 100%;
+			display: inline-block;
+			width: 20px;
+			height: 22px;
+			margin-left: 10px;
+			content: "";
+			transform: translateY(-50%);
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-image: url("data:image/svg+xml; utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0…717H.221l10.301-13.666L.221.274 0 0h8.981l.277.274 10.304 13.777z'/></svg>");
+		}
+	}
+
+	// ########  ##     ## ######## ########  #######  ##    ##  ######
+	// ##     ## ##     ##    ##       ##    ##     ## ###   ## ##    ##
+	// ##     ## ##     ##    ##       ##    ##     ## ####  ## ##
+	// ########  ##     ##    ##       ##    ##     ## ## ## ##  ######
+	// ##     ## ##     ##    ##       ##    ##     ## ##  ####       ##
+	// ##     ## ##     ##    ##       ##    ##     ## ##   ### ##    ##
+	// ########   #######     ##       ##     #######  ##    ##  ######
+
+	@include e('button-add-image') {
+		@extend %edit-button;
+
+		background-color: dodgerblue;
+		right: 1rem;
+		top: 1rem;
+
+		&:hover {
+			background-color: darken(dodgerblue, 20%);
+		}
+	}
+
+	@include e('button-remove') {
+		@extend %edit-button;
+
+		background-color: firebrick;
+		border-radius: 100%;
+		left: 1rem;
+		top: 1rem;
+
+		&:hover {
+			background-color: darken(firebrick, 20%);
+		}
+	}
+
+	// ####  ######   #######  ##    ##  ######
+	//  ##  ##    ## ##     ## ###   ## ##    ##
+	//  ##  ##       ##     ## ####  ## ##
+	//  ##  ##       ##     ## ## ## ##  ######
+	//  ##  ##       ##     ## ##  ####       ##
+	//  ##  ##    ## ##     ## ##   ### ##    ##
+	// ####  ######   #######  ##    ##  ######
+
+	@include e('icon-add-image') {
+		@extend %edit-button-icon;
+	}
+
+	@include e('icon-remove') {
+		@extend %edit-button-icon;
+	}
+
+	//  ######   #######  ########  ######## #### ##    ##  ######
+	// ##    ## ##     ## ##     ##    ##     ##  ###   ## ##    ##
+	// ##       ##     ## ##     ##    ##     ##  ####  ## ##
+	//  ######  ##     ## ########     ##     ##  ## ## ## ##   ####
+	//       ## ##     ## ##   ##      ##     ##  ##  #### ##    ##
+	// ##    ## ##     ## ##    ##     ##     ##  ##   ### ##    ##
+	//  ######   #######  ##     ##    ##    #### ##    ##  ######
+
+	@include e('sorting-slides') {
+		> * + * {
+			margin-top: 0.5rem;
+		}
+	}
+
+	@include e('sorting-slide') {
+		border: 1px solid #555;
+		display: flex;
+		flex-direction: row;
+	}
+
+	@include e('sorting-drag-handle') {
+		border-right: 1px solid #555;
+		background-color: #eee;
+		align-content: center;
+		display: flex;
+		justify-content: center;
+		padding: 0.25rem;
+	}
+
+	@include e('sorting-drag-handle-icon') {
+		display: block;
+		height: auto;
+		width: 1rem;
+	}
+
+	@include e('sorting-story-text') {
+		align-content: center;
+		display: flex;
+		justify-content: flex-start;
+		padding: 0.25rem;
+	}
+
+	// ########  ##     ## ######## ########  #######  ##    ##  ######
+	// ##     ## ##     ##    ##       ##    ##     ## ###   ## ##    ##
+	// ##     ## ##     ##    ##       ##    ##     ## ####  ## ##
+	// ########  ##     ##    ##       ##    ##     ## ## ## ##  ######
+	// ##     ## ##     ##    ##       ##    ##     ## ##  ####       ##
+	// ##     ## ##     ##    ##       ##    ##     ## ##   ### ##    ##
+	// ########   #######     ##       ##     #######  ##    ##  ######
+
+	@include e('buttons') {
+		bottom: -0.5rem;
+		display: flex;
+		flex-direction: row;
+		position: absolute;
+		right: 2rem;
+		z-index: 4;
+
+		> * + * {
+			margin-left: 0.5rem;
+		}
+	}
+
+	@include e('next-button') {
+		@extend %nav-button;
+	}
+	@include e('prev-button') {
+		@extend %nav-button;
+	}
+
+	@include e('next-icon') {
+		@extend %nav-button-icon;
+	}
+	@include e('prev-icon') {
+		@extend %nav-button-icon;
+	}
+
+}

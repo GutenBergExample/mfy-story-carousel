@@ -1,0 +1,30 @@
+{
+  "name": "story-carousel-cgb-guten-block",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "cgb-scripts start",
+    "build": "cgb-scripts build",
+    "eject": "cgb-scripts eject"
+  },
+  "dependencies": {
+    "array-rearrange": "^2.2.2",
+    "bem-cn": "^3.0.0",
+    "cgb-scripts": "1.11.0",
+    "classnames": "^2.2.6",
+    "deep-copy": "^1.4.2",
+    "eslint-config-wordpress": "^2.0.0",
+    "number-to-words": "^1.2.4",
+    "pluralize": "^7.0.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-responsive-carousel": "^3.1.42",
+    "react-sortablejs": "^1.4.0",
+    "react-svg-loader": "^2.1.0",
+    "sass-bem": "^2.6.5",
+    "sortablejs": "^1.7.0",
+    "stylelint": "^9.6.0",
+    "stylelint-config-sass-guidelines": "^5.2.0",
+    "title-case": "^2.1.1"
+  }
+}

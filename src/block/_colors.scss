@@ -1,0 +1,16 @@
+// Add percentage of white to a color
+@function tint($color, $percent) {
+	@return mix(white, $color, $percent);
+}
+
+// Add percentage of black to a color
+@function shade($color, $percent) {
+	@return mix(black, $color, $percent);
+}
+
+$color-wrong-orange: #e87526;
+$color-wrong-orange-s20: shade($color-wrong-orange, 20%);
+$color-wrong-orange-s10: shade($color-wrong-orange, 10%);
+$color-wrong-orange-t10: tint($color-wrong-orange, 10%);
+$color-wrong-orange-t20: tint($color-wrong-orange, 20%);
+$color-wrong-orange-t90: tint($color-wrong-orange, 90%);
