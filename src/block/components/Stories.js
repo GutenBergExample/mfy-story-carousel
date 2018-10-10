@@ -15,7 +15,7 @@ export const Stories = ( {
 	stories,
 } ) => {
 	if ( 0 === stories.length ) {
-		return;
+		return '';
 	}
 
 	return (
