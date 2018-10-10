@@ -93,15 +93,15 @@
   -ms-flex-direction: row;
       flex-direction: row;
   font-family: Gentona, sans-serif; }
+  .story-carousel > * + * {
+    margin-left: 1rem; }
   .story-carousel .editor-rich-text__tinymce + .editor-rich-text__tinymce {
     color: #ccc; }
   .story-carousel__info {
     -ms-flex-preferred-size: 50%;
         flex-basis: 50%;
     -ms-flex-positive: 0;
-        flex-grow: 0;
-    -ms-flex-order: 1;
-        order: 1; }
+        flex-grow: 0; }
   .story-carousel__heading {
     color: #e87526;
     font-size: 3.375rem;
@@ -111,8 +111,6 @@
         flex-basis: 50%;
     -ms-flex-positive: 0;
         flex-grow: 0;
-    -ms-flex-order: 2;
-        order: 2;
     padding-bottom: 0.5rem;
     position: relative; }
   .story-carousel__story-container {

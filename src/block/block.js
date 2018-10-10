@@ -9,7 +9,7 @@
 import './style.scss';
 import './editor.scss';
 
-import EditBlock from './components/Block';
+import StoryCarousel from './components/StoryCarousel';
 
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 const { __ } = wp.i18n;
@@ -130,7 +130,7 @@ registerBlockType( 'cgb/block-story-carousel', {
 			setAttributes,
 		} = props;
 		return (
-			<EditBlock
+			<StoryCarousel
 				align={ align }
 				copy={ copy }
 				heading={ heading }

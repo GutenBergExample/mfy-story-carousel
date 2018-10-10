@@ -20,32 +20,17 @@ export default class Story extends Component {
 	constructor( props ) {
 		super( ...arguments );
 		this.props = props;
-
-		this.setStoryAttributes = this.setStoryAttributes.bind( this );
-	}
-
-	setStoryAttributes( idx, nextAttributes ) {
-		const { stories, setAttributes } = this.props;
-		const nextStories = stories.map( ( story, _idx ) => {
-			if ( _idx !== idx ) {
-				return story;
-			}
-			return { ...story, ...nextAttributes };
-		} );
-		setAttributes( {
-			stories: nextStories,
-		} );
 	}
 
 	render() {
-		const { idx, stories, onRemoveStory } = this.props;
+		const { idx, stories, onRemoveStory, setStoryAttributes } = this.props;
 		const { storyText, storyImage, storyLinkText, storyLinkUrl } = stories[ idx ];
 
 		const text = (
 			<div className={ b( 'story-text' ).toString() }>
 				<RichText
 					onChange={ nextStoryText => {
-						this.setStoryAttributes( idx, { storyText: nextStoryText } );
+						setStoryAttributes( idx, { storyText: nextStoryText } );
 					} }
 					placeholder={ 'Story Text' }
 					value={ storyText }
@@ -58,7 +43,7 @@ export default class Story extends Component {
 				<div className={ b( 'overlay-text' ).toString() }>
 					<RichText
 						onChange={ nextStoryLinkText => {
-							this.setStoryAttributes( idx, {
+							setStoryAttributes( idx, {
 								storyLinkText: nextStoryLinkText,
 							} );
 						} }
@@ -68,7 +53,7 @@ export default class Story extends Component {
 					/>
 					<URLInputButton
 						onChange={ nextStoryLinkUrl => {
-							this.setStoryAttributes( idx, { storyLinkUrl: nextStoryLinkUrl } );
+							setStoryAttributes( idx, { storyLinkUrl: nextStoryLinkUrl } );
 						} }
 						url={ storyLinkUrl }
 					/>
@@ -81,7 +66,7 @@ export default class Story extends Component {
 				onSelect={ nextStoryImage => {
 					const { sizes } = nextStoryImage;
 					if ( sizes && sizes.full.url ) {
-						this.setStoryAttributes( idx, { storyImage: sizes.full.url } );
+						setStoryAttributes( idx, { storyImage: sizes.full.url } );
 					}
 				} }
 				render={ ( { open } ) => (

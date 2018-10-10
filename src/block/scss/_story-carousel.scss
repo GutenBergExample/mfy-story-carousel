@@ -67,6 +67,10 @@
 	flex-direction: row;
 	font-family: Gentona, sans-serif;
 
+	> * + * {
+		margin-left: 1rem;
+	}
+
 	// Placeholder text
 	.editor-rich-text__tinymce + .editor-rich-text__tinymce {
 		color: #ccc;
@@ -75,7 +79,6 @@
 	@include e('info') {
 		flex-basis: 50%;
 		flex-grow: 0;
-		order: 1;
 	}
 
 	@include e('heading') {
@@ -100,7 +103,6 @@
 	@include e('stories-container') {
 		flex-basis: 50%;
 		flex-grow: 0;
-		order: 2;
 		padding-bottom: 0.5rem;
 		position: relative;
 	}

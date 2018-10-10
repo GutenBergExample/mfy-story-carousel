@@ -38,6 +38,7 @@ export default class Stories extends Component {
 		this.onPrevStory = this.onPrevStory.bind( this );
 		this.onRemoveStory = this.onRemoveStory.bind( this );
 		this.prevStoryContainerIdx = this.prevStoryContainerIdx.bind( this );
+		this.setStoryAttributes = this.setStoryAttributes.bind( this );
 	}
 
 	componentDidMount() {
@@ -125,6 +126,19 @@ export default class Stories extends Component {
 		return 0 <= maybePrev ? maybePrev : storyContainers.length - 1;
 	}
 
+	setStoryAttributes( idx, nextAttributes ) {
+		const { stories, setAttributes } = this.props;
+		const nextStories = stories.map( ( story, _idx ) => {
+			if ( _idx !== idx ) {
+				return story;
+			}
+			return { ...story, ...nextAttributes };
+		} );
+		setAttributes( {
+			stories: nextStories,
+		} );
+	}
+
 	render() {
 		const { setAttributes, stories } = this.props;
 
@@ -181,6 +195,8 @@ export default class Stories extends Component {
 								idx={ idx }
 								stories={ stories }
 								setAttributes={ setAttributes }
+								onRemoveStory={ this.onRemoveStory }
+								setStoryAttributes={ this.setStoryAttributes }
 							/>
 						) ) }
 					</div>
