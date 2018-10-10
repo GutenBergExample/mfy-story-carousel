@@ -10,7 +10,7 @@
 // @import '../../node_modules/tiny-slider/dist/tiny-slider';
 
 @import 'colors';
-@import 'button';
+@import 'button-primary';
 
 %edit-button {
 	all: unset;
@@ -86,8 +86,7 @@
 	}
 
 	@include e('link') {
-		background-color: #ff0;
-		border: 1px solid #000;
+		@extend %button-primary;
 	}
 
 	//  ######  ########  #######  ########  #### ########  ######

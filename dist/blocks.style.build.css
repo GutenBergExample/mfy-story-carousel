@@ -17,6 +17,39 @@
  * Story Edit Buttons: 3
  * Story Nav Buttons: 4
  */
+.story-carousel__link {
+  -ms-flex-align: center;
+      align-items: center;
+  background-color: #e87526;
+  color: #000;
+  display: -ms-flexbox;
+  display: flex;
+  height: 50px;
+  -ms-flex-pack: center;
+      justify-content: center;
+  margin-bottom: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase; }
+  .story-carousel__link::before, .story-carousel__link::after {
+    border-style: solid solid none none;
+    border-width: 50px 40px 0;
+    content: '';
+    height: 0;
+    position: absolute;
+    top: 0;
+    width: 0; }
+  .story-carousel__link::before {
+    border-color: #ba5e1e transparent;
+    left: 0; }
+  .story-carousel__link::after {
+    border-color: transparent #ba5e1e;
+    right: 0; }
+  .story-carousel__link:active, .story-carousel__link:focus, .story-carousel__link:hover {
+    background-color: #d16922; }
+
 .story-carousel__button-add-image, .story-carousel__button-remove {
   all: unset;
   background-color: grey;
@@ -73,9 +106,6 @@
     color: #e87526;
     font-size: 3.375rem;
     line-height: 3.5rem; }
-  .story-carousel__link {
-    background-color: #ff0;
-    border: 1px solid #000; }
   .story-carousel__stories-container {
     -ms-flex-preferred-size: 50%;
         flex-basis: 50%;

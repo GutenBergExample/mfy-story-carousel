@@ -1,0 +1,51 @@
+@import 'colors';
+
+$color-button-primary-background: $color-wrong-orange;
+$color-button-primary-accent: $color-wrong-orange-s20;
+$color-button-primary-background--active: $color-wrong-orange-s10;
+
+%button-primary {
+	// TODO: Fix this @include
+	// @include heading-10;
+	align-items: center;
+	// background-color: $color-button-primary-background;
+	background-color: $color-button-primary-background;
+	color: #000;
+	display: flex;
+	height: 50px;
+	justify-content: center;
+	margin-bottom: 10px;
+	padding-left: 40px;
+	padding-right: 40px;
+	position: relative;
+	text-align: center;
+	text-transform: uppercase;
+
+	&::before,
+	&::after {
+		border-style: solid solid none none;
+		border-width: 50px 40px 0;
+		content: '';
+		height: 0;
+		position: absolute;
+		top: 0;
+		width: 0;
+	}
+
+	&::before {
+		border-color: $color-button-primary-accent transparent;
+		left: 0;
+	}
+
+	&::after {
+		border-color: transparent $color-button-primary-accent;
+		right: 0;
+	}
+
+	&:active,
+	&:focus,
+	&:hover {
+		// background-color: $color-button-primary-background--active;
+		background-color: $color-button-primary-background--active;
+	}
+}
