@@ -2,14 +2,10 @@ const { InspectorControls } = wp.editor;
 const { Component, Fragment } = wp.element;
 const { Button, PanelBody } = wp.components;
 
-import { block } from 'bem-cn';
-
 import Story from './Story';
 
 import ArrowLeft from 'react-svg-loader!../svgs/arrow-left.svg';
 import ArrowRight from 'react-svg-loader!../svgs/arrow-right.svg';
-
-const b = block( 'story-carousel' );
 
 import { toWordsOrdinal } from 'number-to-words';
 import dcopy from 'deep-copy';
@@ -72,7 +68,8 @@ export default class Stories extends Component {
 	}
 
 	getStoryContainers() {
-		return document.querySelectorAll( `.${ b( 'story-container' ).toString() }` );
+		const { block } = this.props;
+		return document.querySelectorAll( `.${ block( 'story-container' ).toString() }` );
 	}
 
 	nextStoryContainerIdx() {
@@ -140,21 +137,15 @@ export default class Stories extends Component {
 	}
 
 	render() {
-		const { setAttributes, stories } = this.props;
-
-		if ( 0 === stories.length ) {
-			return '';
-		}
+		const { block, setAttributes, stories } = this.props;
 
 		return (
 			<Fragment>
 				<InspectorControls>
 					<PanelBody>
-						<h2>
-							{ stories.length } { pluralize( 'Story', stories.length ) }
-						</h2>
+						<h2>{ `${ stories.length } ${ pluralize( 'Story', stories.length ) }` }</h2>
 						<Sortable
-							className={ b( 'sorting-slides' ).toString() }
+							className={ block( 'sorting-slides' ).toString() }
 							onChange={ order => {
 								// The values in the order array are strings
 								// Fix it by making them integers
@@ -167,16 +158,16 @@ export default class Stories extends Component {
 						>
 							{ stories.map( ( story, _idx ) => (
 								<li
-									className={ b( 'sorting-slide' ).toString() }
+									className={ block( 'sorting-slide' ).toString() }
 									key={ _idx }
 									data-id={ _idx }
 								>
-									<span className={ b( 'sorting-drag-handle' ).toString() }>
+									<span className={ block( 'sorting-drag-handle' ).toString() }>
 										<DragHandle
-											className={ b( 'sorting-drag-handle-icon' ).toString() }
+											className={ block( 'sorting-drag-handle-icon' ).toString() }
 										/>
 									</span>
-									<span className={ b( 'sorting-story-text' ).toString() }>
+									<span className={ block( 'sorting-story-text' ).toString() }>
 										{ story.storyText && 0 < story.storyText.length ?
 											story.storyText :
 											`${ titleCase( toWordsOrdinal( _idx + 1 ) ) } Story` }
@@ -187,32 +178,35 @@ export default class Stories extends Component {
 						<Button onClick={ this.onAddStory }>Add Story</Button>
 					</PanelBody>
 				</InspectorControls>
-				<div className={ b( 'stories-container' ).toString() }>
-					<div className={ b( 'stories' ).toString() }>
-						{ stories.map( ( story, idx ) => (
-							<Story
-								key={ idx }
-								idx={ idx }
-								stories={ stories }
-								setAttributes={ setAttributes }
-								onRemoveStory={ this.onRemoveStory }
-								setStoryAttributes={ this.setStoryAttributes }
-							/>
-						) ) }
+				<div className={ block( 'stories-container' ).toString() }>
+					<div className={ block( 'stories' ).toString() }>
+						{ stories &&
+							stories.map &&
+							stories.map( ( story, idx ) => (
+								<Story
+									block={ block }
+									key={ idx }
+									idx={ idx }
+									stories={ stories }
+									setAttributes={ setAttributes }
+									onRemoveStory={ this.onRemoveStory }
+									setStoryAttributes={ this.setStoryAttributes }
+								/>
+							) ) }
 					</div>
 					{ 1 < stories.length && (
-						<div className={ b( 'buttons' ).toString() }>
+						<div className={ block( 'buttons' ).toString() }>
 							<button
-								className={ b( 'prev-button' ).toString() }
+								className={ block( 'prev-button' ).toString() }
 								onClick={ this.onPrevStory }
 							>
-								<ArrowLeft className={ b( 'prev-icon' ).toString() } />
+								<ArrowLeft className={ block( 'prev-icon' ).toString() } />
 							</button>
 							<button
-								className={ b( 'next-button' ).toString() }
+								className={ block( 'next-button' ).toString() }
 								onClick={ this.onNextStory }
 							>
-								<ArrowRight className={ b( 'next-icon' ).toString() } />
+								<ArrowRight className={ block( 'next-icon' ).toString() } />
 							</button>
 						</div>
 					) }

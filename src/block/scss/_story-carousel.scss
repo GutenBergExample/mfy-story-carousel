@@ -85,7 +85,8 @@
 		color: $color-wrong-orange;
 
 		font-size: 3.375rem;
-    line-height: 3.5rem;
+		line-height: 3.5rem;
+		text-transform: uppercase;
 	}
 
 	@include e('link') {

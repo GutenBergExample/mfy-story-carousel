@@ -1,16 +1,12 @@
 const { RichText, URLInputButton } = wp.editor;
 
-import { block } from 'bem-cn';
-
-const b = block( 'story-carousel' );
-
 export default function Info( props ) {
-	const { copy, heading, linkText, linkUrl, setAttributes } = props;
+	const { block, copy, heading, linkText, linkUrl, setAttributes } = props;
 
 	return (
-		<div className={ b( 'info' ).toString() }>
+		<div className={ block( 'info' ).toString() }>
 			<RichText
-				className={ b( 'heading' ).toString() }
+				className={ block( 'heading' ).toString() }
 				onChange={ nextHeading => {
 					setAttributes( {
 						heading: nextHeading,
@@ -21,7 +17,7 @@ export default function Info( props ) {
 				value={ heading }
 			/>
 			<RichText
-				className={ b( 'copy' ).toString() }
+				className={ block( 'copy' ).toString() }
 				onChange={ nextCopy => {
 					setAttributes( {
 						copy: nextCopy,
@@ -31,7 +27,7 @@ export default function Info( props ) {
 				value={ copy }
 			/>
 			<RichText
-				className={ b( 'link' ).toString() }
+				className={ block( 'link' ).toString() }
 				onChange={ nextLinkText => {
 					setAttributes( {
 						linkText: nextLinkText,

@@ -105,7 +105,8 @@
   .story-carousel__heading {
     color: #e87526;
     font-size: 3.375rem;
-    line-height: 3.5rem; }
+    line-height: 3.5rem;
+    text-transform: uppercase; }
   .story-carousel__stories-container {
     -ms-flex-preferred-size: 50%;
         flex-basis: 50%;
@@ -295,11 +296,6 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
-.carousel button {
-  outline: 0;
-  border: 0;
-  background: none; }
-
 .carousel img {
   width: 100%;
   display: inline-block;
@@ -309,6 +305,9 @@
   position: relative; }
 
 .carousel .control-arrow {
+  outline: 0;
+  border: 0;
+  background: none;
   top: 50%;
   margin-top: -13px;
   font-size: 18px; }

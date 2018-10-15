@@ -2,12 +2,8 @@
 const { Component, Fragment } = wp.element;
 const { BlockAlignmentToolbar, BlockControls } = wp.editor;
 
-import { block } from 'bem-cn';
-
 import Stories from './Stories';
 import Info from './Info';
-
-const b = block( 'story-carousel' );
 
 export default class StoryCarousel extends Component {
 	constructor( props ) {
@@ -17,6 +13,7 @@ export default class StoryCarousel extends Component {
 
 	render() {
 		const {
+			block,
 			align,
 			copy,
 			heading,
@@ -36,15 +33,20 @@ export default class StoryCarousel extends Component {
 						} }
 					/>
 				</BlockControls>
-				<div className={ b() }>
+				<div className={ block() }>
 					<Info
+						block={ block }
 						copy={ copy }
 						heading={ heading }
 						linkText={ linkText }
 						linkUrl={ linkUrl }
 						setAttributes={ setAttributes }
 					/>
-					<Stories setAttributes={ setAttributes } stories={ stories } />
+					<Stories
+						block={ block }
+						setAttributes={ setAttributes }
+						stories={ stories }
+					/>
 				</div>
 			</Fragment>
 		);

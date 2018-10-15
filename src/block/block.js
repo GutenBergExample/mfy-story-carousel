@@ -9,7 +9,12 @@
 import './style.scss';
 import './editor.scss';
 
-import StoryCarousel from './components/StoryCarousel';
+import StoryCarouselEdit from './components/StoryCarousel';
+import Save from './components/Save';
+
+import { block } from 'bem-cn';
+
+const b = block( 'story-carousel' );
 
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 const { __ } = wp.i18n;
@@ -27,32 +32,45 @@ const blockAttributes = {
 		type: 'string',
 	},
 	copy: {
-		type: 'string',
+		source: 'children',
+		selector: `.${ b( 'copy' ).toString() }`,
 	},
 	heading: {
-		type: 'string',
+		source: 'children',
+		selector: `.${ b( 'heading' ).toString() }`,
 	},
 	linkText: {
-		type: 'string',
+		source: 'children',
+		selector: `.${ b( 'link' ).toString() }`,
 	},
 	linkUrl: {
-		type: 'string',
+		source: 'attribute',
+		selector: `.${ b( 'link' ).toString() }`,
+		attribute: 'href',
 	},
 	stories: {
-		type: 'array',
 		default: [],
+		source: 'query',
+		selector: `.${ b( 'story' ) }`,
 		query: {
 			storyText: {
-				type: 'string',
+				source: 'children',
+				selector: `.${ b( 'story-text' ).toString() }`,
 			},
 			storyImage: {
-				type: 'string',
+				source: 'attribute',
+				selector: `.${ b( 'story-container' ).toString() }`,
+				attribute: 'data-image',
 			},
 			storyLinkText: {
-				type: 'string',
+				source: 'children',
+				selector: `.${ b( 'overlay-text' ).toString() }`,
 			},
 			storyLinkUrl: {
 				type: 'string',
+				source: 'attribute',
+				selector: `.${ b( 'overlay-text' ).toString() }`,
+				attribute: 'href',
 			},
 		},
 	},
@@ -130,8 +148,9 @@ registerBlockType( 'cgb/block-story-carousel', {
 			setAttributes,
 		} = props;
 		return (
-			<StoryCarousel
+			<StoryCarouselEdit
 				align={ align }
+				block={ b }
 				copy={ copy }
 				heading={ heading }
 				linkText={ linkText }
@@ -162,23 +181,20 @@ registerBlockType( 'cgb/block-story-carousel', {
 	 *
 	 * @returns {string} The HTML used when rendering the block
 	 */
-	save: function() {
+	save: function( props ) {
+		const {
+			attributes: { align, copy, heading, linkText, linkUrl, stories },
+		} = props;
 		return (
-			<div>
-				<p>— Hello from the frontend.</p>
-				<p>
-					CGB BLOCK: <code>story-carousel</code> is a new Gutenberg block.
-				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>
-					.
-				</p>
-			</div>
+			<Save
+				align={ align }
+				block={ b }
+				copy={ copy }
+				heading={ heading }
+				linkText={ linkText }
+				linkUrl={ linkUrl }
+				stories={ stories }
+			/>
 		);
 	},
 } );

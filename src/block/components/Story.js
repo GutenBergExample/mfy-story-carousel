@@ -2,13 +2,9 @@ const { Component } = wp.element;
 const { MediaUpload, RichText, URLInputButton } = wp.editor;
 const { __ } = wp.i18n;
 
-import { block } from 'bem-cn';
-
 // Import SVGs
 import AddImage from 'react-svg-loader!../svgs/file-picture-add.svg';
 import Remove from 'react-svg-loader!../svgs/remove-2.svg';
-
-const b = block( 'story-carousel' );
 
 /**
  * Story Component
@@ -23,11 +19,17 @@ export default class Story extends Component {
 	}
 
 	render() {
-		const { idx, stories, onRemoveStory, setStoryAttributes } = this.props;
+		const {
+			block,
+			idx,
+			stories,
+			onRemoveStory,
+			setStoryAttributes,
+		} = this.props;
 		const { storyText, storyImage, storyLinkText, storyLinkUrl } = stories[ idx ];
 
 		const text = (
-			<div className={ b( 'story-text' ).toString() }>
+			<div className={ block( 'story-text' ).toString() }>
 				<RichText
 					onChange={ nextStoryText => {
 						setStoryAttributes( idx, { storyText: nextStoryText } );
@@ -39,8 +41,8 @@ export default class Story extends Component {
 		);
 
 		const link = (
-			<div className={ b( 'overlay' ).toString() }>
-				<div className={ b( 'overlay-text' ).toString() }>
+			<div className={ block( 'overlay' ).toString() }>
+				<div className={ block( 'overlay-text' ).toString() }>
 					<RichText
 						onChange={ nextStoryLinkText => {
 							setStoryAttributes( idx, {
@@ -71,11 +73,11 @@ export default class Story extends Component {
 				} }
 				render={ ( { open } ) => (
 					<button
-						className={ b( 'button-add-image' ).toString() }
+						className={ block( 'button-add-image' ).toString() }
 						onClick={ open }
 						title={ __( 'Upload or Select Image' ) }
 					>
-						<AddImage className={ b( 'icon-add-image' ).toString() } />
+						<AddImage className={ block( 'icon-add-image' ).toString() } />
 					</button>
 				) }
 				value={ storyImage }
@@ -84,20 +86,20 @@ export default class Story extends Component {
 
 		const deleteButton = (
 			<button
-				className={ b( 'button-remove' ).toString() }
+				className={ block( 'button-remove' ).toString() }
 				onClick={ () => onRemoveStory( idx ) }
 				title={ __( 'Remove Story' ) }
 			>
-				<Remove className={ b( 'icon-remove' ).toString() } />
+				<Remove className={ block( 'icon-remove' ).toString() } />
 			</button>
 		);
 
 		return (
 			<div
-				className={ b( 'story-container' ).toString() }
+				className={ block( 'story-container' ).toString() }
 				style={ { backgroundImage: `url(${ storyImage })` } }
 			>
-				<div className={ b( 'story' ).toString() }>
+				<div className={ block( 'story' ).toString() }>
 					{ text }
 					{ link }
 					{ imageButton }
