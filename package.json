@@ -23,6 +23,7 @@
     "react-svg-loader": "^2.1.0",
     "sass-bem": "^2.6.5",
     "sortablejs": "^1.7.0",
+    "styled-components": "^4.0.0",
     "stylelint": "^9.6.0",
     "stylelint-config-sass-guidelines": "^5.2.0",
     "swiper": "^4.4.1",

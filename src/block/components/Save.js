@@ -37,19 +37,18 @@ export default class Save extends Component {
 									idx
 								) => {
 									return (
-										<div
-											className={ block( 'story-container' ).toString() }
-											key={ idx }
-											style={ { backgroundImage: `url(${ storyImage })` } }
-										>
-											<div className={ block( 'story' ).toString() }>
+										<div className={ block( 'story' ).toString() } key={ idx }>
+											<div
+												className={ block( 'background' ).toString() }
+												data-image={ storyImage }
+											>
 												<div className={ block( 'story-text' ).toString() }>
 													{ storyText }
 												</div>
 												<div className={ block( 'overlay' ).toString() }>
 													<div className={ block( 'overlay-text' ).toString() }>
-														{ /* <a href={ storyLinkUrl }>{ storyLinkText }</a> */ }
-														<a href={ storyLinkUrl }>{ 'Did This Error' }</a>
+														<a href={ storyLinkUrl }>{ storyLinkText }</a>
+														{ /* <a href={ storyLinkUrl }>{ 'Did This Error' }</a> */ }
 													</div>
 												</div>
 											</div>

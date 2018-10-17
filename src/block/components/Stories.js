@@ -13,8 +13,9 @@ import pluralize from 'pluralize';
 import reorder from 'array-rearrange';
 import Sortable from 'react-sortablejs';
 import titleCase from 'title-case';
+import styled from 'styled-components';
 
-import DragHandle from 'react-svg-loader!../svgs/ic-drag-handle.svg';
+import DragHandleIcon from 'react-svg-loader!../svgs/ic-drag-handle.svg';
 
 export default class Stories extends Component {
 	constructor( props ) {
@@ -44,16 +45,16 @@ export default class Stories extends Component {
 	}
 
 	// This is mostly to "rewind" the carousel when the number of slides changes
-	componentDidUpdate( prevProps ) {
-		// console.log( 'component did update' );
-		const storyContainers = this.getStoryContainers();
-		if ( prevProps.stories.length !== storyContainers.length ) {
-			this.setState( { storyContainers }, () => {
-				// Go back to the first slide in the cqrousel
-				this.activateStoryContainer( storyContainers.length - 1 );
-			} );
-		}
-	}
+	// componentDidUpdate( prevProps ) {
+	// 	// console.log( 'component did update' );
+	// 	const storyContainers = this.getStoryContainers();
+	// 	if ( prevProps.stories.length !== storyContainers.length ) {
+	// 		this.setState( { storyContainers }, () => {
+	// 			// Go back to the first slide in the cqrousel
+	// 			this.activateStoryContainer( storyContainers.length - 1 );
+	// 		} );
+	// 	}
+	// }
 
 	activateStoryContainer( idx ) {
 		const { storyContainers } = this.state;
@@ -139,42 +140,82 @@ export default class Stories extends Component {
 	render() {
 		const { block, setAttributes, stories } = this.props;
 
+		// @include e('sorting-slides') {
+		// 	> * + * {
+		// 		margin-top: 0.5rem;
+		// 	}
+		// }
+
+		// @include e('sorting-slide') {
+		// 	border: 1px solid #555;
+		// 	display: flex;
+		// 	flex-direction: row;
+		// }
+
+		// @include e('sorting-drag-handle') {
+		// 	border-right: 1px solid #555;
+		// 	background-color: #eee;
+		// 	align-content: center;
+		// 	display: flex;
+		// 	justify-content: center;
+		// 	padding: 0.25rem;
+		// }
+
+		// @include e('sorting-drag-handle-icon') {
+		// 	display: block;
+		// 	height: auto;
+		// 	width: 1rem;
+		// }
+
+		// @include e('sorting-story-text') {
+		// 	align-content: center;
+		// 	display: flex;
+		// 	justify-content: flex-start;
+		// 	padding: 0.25rem;
+		// }
+
+		const StyledSortableStoriesWrapper = styled.div`
+			li {
+				display: flex;
+				flex-direction: row;
+			}
+
+			svg {
+				height: auto;
+				width: 1rem;
+			}
+		`;
+
 		return (
 			<Fragment>
 				<InspectorControls>
 					<PanelBody>
 						<h2>{ `${ stories.length } ${ pluralize( 'Story', stories.length ) }` }</h2>
-						<Sortable
-							className={ block( 'sorting-slides' ).toString() }
-							onChange={ order => {
-								// The values in the order array are strings
-								// Fix it by making them integers
-								const fixedOrder = order.map( num => parseInt( num, 10 ) );
-								const nextStories = dcopy( stories );
-								reorder( nextStories, fixedOrder );
-								setAttributes( { stories: nextStories } );
-							} }
-							tag="ul"
-						>
-							{ stories.map( ( story, _idx ) => (
-								<li
-									className={ block( 'sorting-slide' ).toString() }
-									key={ _idx }
-									data-id={ _idx }
-								>
-									<span className={ block( 'sorting-drag-handle' ).toString() }>
-										<DragHandle
-											className={ block( 'sorting-drag-handle-icon' ).toString() }
-										/>
-									</span>
-									<span className={ block( 'sorting-story-text' ).toString() }>
-										{ story.storyText && 0 < story.storyText.length ?
-											story.storyText :
-											`${ titleCase( toWordsOrdinal( _idx + 1 ) ) } Story` }
-									</span>
-								</li>
-							) ) }
-						</Sortable>
+						<StyledSortableStoriesWrapper>
+							<Sortable
+								className={ block( 'sorting-slides' ).toString() }
+								onChange={ order => {
+									// The values in the order array are strings
+									// Fix it by making them integers
+									const fixedOrder = order.map( num => parseInt( num, 10 ) );
+									const nextStories = dcopy( stories );
+									reorder( nextStories, fixedOrder );
+									setAttributes( { stories: nextStories } );
+								} }
+								tag="ul"
+							>
+								{ stories.map( ( story, _idx ) => (
+									<li key={ _idx } data-id={ _idx }>
+										<DragHandleIcon />
+										<span>
+											{ story.storyText && 0 < story.storyText.length ?
+												story.storyText :
+												`${ titleCase( toWordsOrdinal( _idx + 1 ) ) } Story` }
+										</span>
+									</li>
+								) ) }
+							</Sortable>
+						</StyledSortableStoriesWrapper>
 						<Button onClick={ this.onAddStory }>Add Story</Button>
 					</PanelBody>
 				</InspectorControls>

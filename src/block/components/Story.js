@@ -3,8 +3,9 @@ const { MediaUpload, RichText, URLInputButton } = wp.editor;
 const { __ } = wp.i18n;
 
 // Import SVGs
-import AddImage from 'react-svg-loader!../svgs/file-picture-add.svg';
-import Remove from 'react-svg-loader!../svgs/remove-2.svg';
+import AddImageIcon from 'react-svg-loader!../svgs/file-picture-add.svg';
+import RemoveIcon from 'react-svg-loader!../svgs/remove-2.svg';
+import styled from 'styled-components';
 
 /**
  * Story Component
@@ -63,47 +64,55 @@ export default class Story extends Component {
 			</div>
 		);
 
-		const imageButton = (
-			<MediaUpload
-				onSelect={ nextStoryImage => {
-					const { sizes } = nextStoryImage;
-					if ( sizes && sizes.full.url ) {
-						setStoryAttributes( idx, { storyImage: sizes.full.url } );
-					}
-				} }
-				render={ ( { open } ) => (
-					<button
-						className={ block( 'button-add-image' ).toString() }
-						onClick={ open }
-						title={ __( 'Upload or Select Image' ) }
-					>
-						<AddImage className={ block( 'icon-add-image' ).toString() } />
-					</button>
-				) }
-				value={ storyImage }
-			/>
-		);
+		const StyledImageButtonWrapper = styled.div`
+			button {
+				background-color: blue;
+				border: 0;
+				height: auto;
+				padding: 0;
+				width: 2rem;
+			}
+		`;
 
-		const deleteButton = (
-			<button
-				className={ block( 'button-remove' ).toString() }
-				onClick={ () => onRemoveStory( idx ) }
-				title={ __( 'Remove Story' ) }
-			>
-				<Remove className={ block( 'icon-remove' ).toString() } />
-			</button>
-		);
+		const StyledDeleteButtonWrapper = styled.div`
+			button {
+				background-color: red;
+				border: 0;
+				height: auto;
+				padding: 0;
+				width: 2rem;
+			}
+		`;
 
 		return (
-			<div
-				className={ block( 'story-container' ).toString() }
-				style={ { backgroundImage: `url(${ storyImage })` } }
-			>
-				<div className={ block( 'story' ).toString() }>
+			<div>
+				<div>
 					{ text }
 					{ link }
-					{ imageButton }
-					{ deleteButton }
+					<StyledImageButtonWrapper>
+						<MediaUpload
+							onSelect={ nextStoryImage => {
+								const { sizes } = nextStoryImage;
+								if ( sizes && sizes.full.url ) {
+									setStoryAttributes( idx, { storyImage: sizes.full.url } );
+								}
+							} }
+							render={ ( { open } ) => (
+								<button onClick={ open } title={ __( 'Upload or Select Image' ) }>
+									<AddImageIcon />
+								</button>
+							) }
+							value={ storyImage }
+						/>
+					</StyledImageButtonWrapper>
+					<StyledDeleteButtonWrapper>
+						<button
+							onClick={ () => onRemoveStory( idx ) }
+							title={ __( 'Remove Story' ) }
+						>
+							<RemoveIcon />
+						</button>
+					</StyledDeleteButtonWrapper>
 				</div>
 			</div>
 		);

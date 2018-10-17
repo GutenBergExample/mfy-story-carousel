@@ -30,49 +30,58 @@ const { __ } = wp.i18n;
 const blockAttributes = {
 	align: {
 		type: 'string',
+		default: '',
 	},
 	copy: {
 		source: 'children',
 		selector: `.${ b( 'copy' ).toString() }`,
+		default: '',
 	},
 	heading: {
 		source: 'children',
 		selector: `.${ b( 'heading' ).toString() }`,
+		default: '',
 	},
 	linkText: {
 		source: 'children',
 		selector: `.${ b( 'link' ).toString() }`,
+		default: '',
 	},
 	linkUrl: {
 		source: 'attribute',
-		selector: `.${ b( 'link' ).toString() }`,
 		attribute: 'href',
+		selector: `.${ b( 'link' ).toString() }`,
+		default: '',
 	},
 	stories: {
-		default: [],
 		source: 'query',
-		selector: `.${ b( 'story' ) }`,
+		selector: `.${ b( 'story' ).toString() }`,
 		query: {
 			storyText: {
 				source: 'children',
 				selector: `.${ b( 'story-text' ).toString() }`,
+				default: '',
 			},
 			storyImage: {
 				source: 'attribute',
-				selector: `.${ b( 'story-container' ).toString() }`,
 				attribute: 'data-image',
+				selector: `.${ b( 'background' ).toString() }`,
+				default: '',
 			},
 			storyLinkText: {
 				source: 'children',
-				selector: `.${ b( 'overlay-text' ).toString() }`,
+				selector: `.${ b( 'overlay-text' ).toString() } a`,
+				default: '',
 			},
 			storyLinkUrl: {
-				type: 'string',
 				source: 'attribute',
-				selector: `.${ b( 'overlay-text' ).toString() }`,
 				attribute: 'href',
+				selector: `.${ b( 'overlay-text' ).toString() } a`,
+				default: '',
 			},
 		},
+		type: 'array',
+		default: [],
 	},
 };
 
@@ -143,6 +152,7 @@ registerBlockType( 'cgb/block-story-carousel', {
 	 * @returns {string} HTML used when editing the block
 	 */
 	edit: function( props ) {
+		// console.dir( props );
 		const {
 			attributes: { align, copy, heading, linkText, linkUrl, stories },
 			setAttributes,
@@ -182,6 +192,7 @@ registerBlockType( 'cgb/block-story-carousel', {
 	 * @returns {string} The HTML used when rendering the block
 	 */
 	save: function( props ) {
+		// console.dir( props );
 		const {
 			attributes: { align, copy, heading, linkText, linkUrl, stories },
 		} = props;
